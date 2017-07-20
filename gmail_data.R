@@ -16,7 +16,13 @@ all.sent = sapply(pg.tokens, function(x) messages(label_ids = "SENT", page_token
                     id(what = "message_id")) 
 
 
-## to(); from(); cc(); bcc(); subject(); body()
+## Useful gmail_message functionality
+# to()
+# from()
+# cc() 
+# bcc()
+# subject()
+# body()
 
 
 ## Retrieve body of text from message id's 
@@ -31,22 +37,3 @@ sent.dates = sapply(unlist(all.sent), function(x) message(id = as.character(x)) 
 ## Create data frame 
 date.text = data.frame(Dates = sent.dates, Message = text.vector)
 
-
-
-
-
-
-
-
-
-all.sent.fixed = sapply(1:8, function(x) threads(label_ids = "SENT", page_token = as.character(x)) %>% 
-                    id(what = "thread_id"))
-hmm = all.sent.fixed %>% unlist() 
-
-
-all.sent = sapply(1:100, function(x) messages(label_ids = "SENT", page_token = as.character(x)) %>% 
-                    id(what = "message_id"))
-big = all.sent %>% unlist() 
-
-# OLDEST MESSAGE/THREAD ID: 1487d1bb52a6af40
-# NEWEST MESSAGE ID: 15d575bfd23b88ec
