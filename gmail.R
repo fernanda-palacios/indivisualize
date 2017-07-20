@@ -12,7 +12,8 @@ library(tidytext)
 library(lubridate)
 
 # load data
-data = read_csv("gmail.csv")
+name <- "Aida-Ylanan"
+data = read_csv("data/gmail.csv")
 # youtube_table = youtube %>% html_nodes("table") %>% .[[1]] %>% html_table()
 
 colnames(data) = c("date", "text")
@@ -56,7 +57,10 @@ new_rows = data.frame(
 
 stop_words_2 <- rbind(stop_words, new_rows)
 
-data.tidy <- data.tidy %>% anti_join(stop_words_2)
+data.tidy <- data.tidy %>% anti_join(stop_words_2) %>% 
+  select(-date)
+
+saveRDS(feed.tidy, paste0("data/", name, "-gmail.RData"))
 
 
 # VISUALIZATION
