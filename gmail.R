@@ -50,8 +50,8 @@ data.tidy %>% count(word, sort = TRUE)
 stop_words
 
 new_rows = data.frame(
-  word = c("aida", "ylanan", "ucla.edu"),
-  lexicon = c("fer", "ylanan", "ucla.edu")
+  word = c("aida", "ylanan", "ucla.edu", "avelina", "a1daylanan"),
+  lexicon = c("fer", "fer", "fer", "fer", "fer")
 )
 
 stop_words_2 <- rbind(stop_words, new_rows)
