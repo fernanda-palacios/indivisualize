@@ -5,7 +5,7 @@ library(lubridate)
 library(ggplot2)
 
 # Reads the youtube html file
-youtube = read_html("~/Documents/iXperience/karamazov/youtube/search-history.html")
+youtube = read_html("youtube/search-history.html")
 youtube_table = youtube %>% html_nodes("table") %>% .[[1]] %>% html_table()
 
 # Depending on the platform, df is assigned to the platform's dataframe (date,text)

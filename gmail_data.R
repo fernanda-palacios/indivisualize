@@ -37,7 +37,7 @@ messages.sent.clean = sapply(messages.sent.id, function(id) {
     date = date(msg),
     body = ifelse(length(body(msg)) == 0, NA, unlist(body(msg)))
   )
-}) %>% as.data.frame() %>% t()
+}) %>% t() %>% as.data.frame()
 
 # set your name
 name <- "zack_chauvin"
