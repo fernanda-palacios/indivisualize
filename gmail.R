@@ -29,6 +29,10 @@ data$date= gsub(" ", "", data$date)
 data$date = as.Date(data$date,format='%d%b%Y')
 
 
+# Get rid of replies
+days = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+str_detect(data$date, )
+
 # Sort by date
 data = arrange(data, .bygroup = date)
 
@@ -50,8 +54,9 @@ data.tidy %>% count(word, sort = TRUE)
 stop_words
 
 new_rows = data.frame(
-  word = c("aida", "ylanan", "ucla.edu", "avelina", "a1daylanan"),
-  lexicon = c("fer", "fer", "fer", "fer", "fer")
+  word = c("aida", "ylanan", "ucla.edu", "avelina", "a1daylanan", 
+           "university", "california",  "los" ,"angeles", "class"),
+  lexicon = c("fer", "fer", "fer", "fer", "fer", "fer", "fer", "fer", "fer", "fer")
 )
 
 stop_words_2 <- rbind(stop_words, new_rows)
