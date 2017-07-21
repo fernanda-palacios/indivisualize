@@ -12,12 +12,14 @@ library(tidytext)
 library(lubridate)
 
 # load data
-data = read_csv("gmail.csv")
+name <- "Aida-Ylanan"
+# data = read_csv("data/gmail.csv")
+
+data = readRDS(paste0("data/", name, "-gmail-wide.RData"))
 # youtube_table = youtube %>% html_nodes("table") %>% .[[1]] %>% html_table()
 
 colnames(data) = c("date", "text")
-youtube_table$date = as.Date(youtube_table$date)
-
+# youtube_table$date = as.Date(youtube_table$date)
 
 # Remove duplicate entries
 data = unique(data)
@@ -31,38 +33,30 @@ data$date = as.Date(data$date,format='%d%b%Y')
 
 # Get rid of replies
 days = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
-str_detect(data$date, )
 
 # Sort by date
 data = arrange(data, .bygroup = date)
 
 # Create year buckets to track development over time
 
-year = year(data$date)
-data = cbind(data, year)
-
+data <- data %>% mutate(year = year(date))
+data$text <- as.character(data$text)
 
 # Split each message into words.
 # word is names of col
 data.tidy <- data %>% unnest_tokens(word, text)
 
-
-# text is dominated by unimportant words
-data.tidy %>% count(word, sort = TRUE)
-
-# REMOVE STOP WORDS 
-stop_words
-
 new_rows = data.frame(
-  word = c("aida", "ylanan", "ucla.edu", "avelina", "a1daylanan", 
-           "university", "california",  "los" ,"angeles", "class"),
-  lexicon = c("fer", "fer", "fer", "fer", "fer", "fer", "fer", "fer", "fer", "fer")
+  word = c("aida", "ylanan", "ucla.edu", "avelina", "a1daylanan", "zack", "college.harvard.edu", "chauvin", "zchauvin"),
+  lexicon = c("fer")
 )
 
 stop_words_2 <- rbind(stop_words, new_rows)
 
-data.tidy <- data.tidy %>% anti_join(stop_words_2)
+data.tidy <- data.tidy %>% anti_join(stop_words_2) %>% 
+  select(-date)
 
+saveRDS(data.tidy, paste0("data/", name, "-gmail.RData"))
 
 # VISUALIZATION
 
